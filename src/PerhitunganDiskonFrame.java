@@ -1,3 +1,7 @@
+
+import java.awt.event.ItemEvent;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,6 +18,8 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
      */
     public PerhitunganDiskonFrame() {
         initComponents();
+        setSize(800, 600); // <- atur ukuran sesuai kebutuhan (width, height)
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -43,15 +49,17 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
         lblHargaAkhir = new javax.swing.JLabel();
         lblHematText = new javax.swing.JLabel();
         lblHemat = new javax.swing.JLabel();
+        btnReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(547, 486));
-        setSize(new java.awt.Dimension(600, 500));
+        setMinimumSize(new java.awt.Dimension(600, 600));
+        setPreferredSize(new java.awt.Dimension(600, 600));
+        setSize(new java.awt.Dimension(600, 600));
 
         jPanel2.setBackground(new java.awt.Color(49, 49, 49));
         jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Riwayat Perhitungan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins Black", 0, 14), new java.awt.Color(255, 255, 255)))); // NOI18N
-        jPanel2.setPreferredSize(new java.awt.Dimension(250, 250));
-        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel2.setPreferredSize(new java.awt.Dimension(200, 200));
+        jPanel2.setLayout(new java.awt.GridLayout());
 
         txtRiwayat.setEditable(false);
         txtRiwayat.setColumns(20);
@@ -71,23 +79,50 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
         lblHargaAsli.setForeground(new java.awt.Color(255, 255, 255));
         lblHargaAsli.setText("Harga Asli ");
 
+        txtHargaAsli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtHargaAsliKeyTyped(evt);
+            }
+        });
+
         lblDiskon.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         lblDiskon.setForeground(new java.awt.Color(255, 255, 255));
         lblDiskon.setText("Persentase Diskon");
 
-        cmbDiskon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0%", "10%", "20%", "30%", "50%", " " }));
+        cmbDiskon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0%", "10%", "20%", "30%", "40%", "50%", " " }));
+        cmbDiskon.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbDiskonItemStateChanged(evt);
+            }
+        });
 
         lblSlider.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         lblSlider.setForeground(new java.awt.Color(255, 255, 255));
         lblSlider.setText("Slider Diskon");
 
+        sldDiskon.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        sldDiskon.setForeground(new java.awt.Color(255, 255, 255));
         sldDiskon.setMajorTickSpacing(10);
         sldDiskon.setMaximum(50);
+        sldDiskon.setPaintLabels(true);
+        sldDiskon.setPaintTicks(true);
+        sldDiskon.setSnapToTicks(true);
         sldDiskon.setValue(0);
+        sldDiskon.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldDiskonStateChanged(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Kode Kupon (Opsional)");
+
+        txtKupon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKuponActionPerformed(evt);
+            }
+        });
 
         btnHitung.setBackground(new java.awt.Color(49, 49, 49));
         btnHitung.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -103,6 +138,11 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
         btnKeluar.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         btnKeluar.setForeground(new java.awt.Color(255, 255, 255));
         btnKeluar.setText("Keluar");
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
 
         lblHargaAkhirText.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         lblHargaAkhirText.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,7 +150,7 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
 
         lblHargaAkhir.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         lblHargaAkhir.setForeground(new java.awt.Color(255, 255, 255));
-        lblHargaAkhir.setText("Rp. 0,00");
+        lblHargaAkhir.setText("Rp. 0.00");
 
         lblHematText.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         lblHematText.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,44 +158,64 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
 
         lblHemat.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         lblHemat.setForeground(new java.awt.Color(255, 255, 255));
-        lblHemat.setText("Rp. 0,00");
+        lblHemat.setText("Rp. 0.00");
+
+        btnReset.setBackground(new java.awt.Color(49, 49, 49));
+        btnReset.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        btnReset.setForeground(new java.awt.Color(255, 255, 255));
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(178, 178, 178)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(lblSlider)
                     .addComponent(lblDiskon)
                     .addComponent(lblHargaAsli)
                     .addComponent(lblHargaAkhirText)
-                    .addComponent(lblHematText))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblHargaAkhir)
-                    .addComponent(btnHitung)
-                    .addComponent(txtKupon, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHemat, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(154, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnKeluar)
+                    .addComponent(lblHematText)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(41, 41, 41)
+                        .addComponent(lblSlider)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblHemat, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                            .addComponent(lblHargaAkhir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cmbDiskon, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtHargaAsli, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(sldDiskon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(87, 87, 87))
+                            .addComponent(txtHargaAsli, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbDiskon, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sldDiskon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnHitung, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtKupon, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHargaAsli)
                     .addComponent(txtHargaAsli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -163,10 +223,10 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDiskon)
                     .addComponent(cmbDiskon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSlider)
-                    .addComponent(sldDiskon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sldDiskon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSlider))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -174,7 +234,8 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHitung)
-                    .addComponent(btnKeluar))
+                    .addComponent(btnKeluar)
+                    .addComponent(btnReset))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHargaAkhirText)
@@ -183,7 +244,7 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHemat)
                     .addComponent(lblHematText))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -192,8 +253,90 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungActionPerformed
-        // TODO add your handling code here:
+    try {
+        double hargaAsli = Double.parseDouble(txtHargaAsli.getText());
+        
+        // Ambil diskon dari ComboBox atau Slider
+        int diskonPersen;
+        if (cmbDiskon.getSelectedItem() != null && cmbDiskon.getSelectedIndex() > 0) {
+            diskonPersen = Integer.parseInt(cmbDiskon.getSelectedItem().toString().replace("%", ""));
+        } else {
+            diskonPersen = sldDiskon.getValue();
+        }
+        
+        // Kode kupon tambahan
+        double diskonKupon = 0;
+        String kode = txtKupon.getText().trim();
+        if (kode.equalsIgnoreCase("HEMAT10")) {
+            diskonKupon = 10;
+        } else if (kode.equalsIgnoreCase("DISKON5")) {
+            diskonKupon = 5;
+        }
+
+        // Total diskon
+        double totalDiskon = diskonPersen + diskonKupon;
+        if (totalDiskon > 100) totalDiskon = 100;
+
+        // Hitung
+        double jumlahHemat = hargaAsli * totalDiskon / 100;
+        double hargaAkhir = hargaAsli - jumlahHemat;
+
+        // Tampilkan hasil
+        lblHargaAkhir.setText(String.format("Rp %.2f", hargaAkhir));
+        lblHemat.setText(String.format("Rp %.2f", jumlahHemat));
+
+        // Tambahkan ke riwayat
+        txtRiwayat.append(String.format(
+            "Harga: Rp%.0f | Diskon: %.0f%% | Hemat: Rp%.0f | Akhir: Rp%.0f%n",
+            hargaAsli, totalDiskon, jumlahHemat, hargaAkhir
+        ));
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Masukkan harga asli yang valid!",
+                "Input Salah", JOptionPane.ERROR_MESSAGE);
+    }        // TODO add your handling code here:
     }//GEN-LAST:event_btnHitungActionPerformed
+
+    private void cmbDiskonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDiskonItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+        String value = cmbDiskon.getSelectedItem().toString();
+        if (value.endsWith("%")) {
+            int val = Integer.parseInt(value.replace("%", ""));
+            sldDiskon.setValue(val);
+        }
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDiskonItemStateChanged
+
+    private void sldDiskonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldDiskonStateChanged
+        int value = sldDiskon.getValue();
+        cmbDiskon.setSelectedItem(value + "%");        // TODO add your handling code here:
+    }//GEN-LAST:event_sldDiskonStateChanged
+
+    private void txtKuponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKuponActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKuponActionPerformed
+
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+    System.exit(0);         // TODO add your handling code here:
+    }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void txtHargaAsliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHargaAsliKeyTyped
+    char c = evt.getKeyChar();
+        if (!Character.isDigit(c) && c != '.') {
+                evt.consume(); // Menolak input non-angka
+        }            // TODO add your handling code here:
+    }//GEN-LAST:event_txtHargaAsliKeyTyped
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+    txtHargaAsli.setText("");
+    cmbDiskon.setSelectedIndex(0); // kembali ke 0%
+    sldDiskon.setValue(0);         // geser slider ke awal
+    txtKupon.setText("");
+    lblHargaAkhir.setText("Rp 0,00");
+    lblHemat.setText("Rp 0,00");
+
+    // Fokuskan kembali ke field harga asli
+    txtHargaAsli.requestFocus();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,6 +376,7 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHitung;
     private javax.swing.JButton btnKeluar;
+    private javax.swing.JButton btnReset;
     private javax.swing.JComboBox<String> cmbDiskon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
