@@ -59,7 +59,7 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(49, 49, 49));
         jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Riwayat Perhitungan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins Black", 0, 14), new java.awt.Color(255, 255, 255)))); // NOI18N
         jPanel2.setPreferredSize(new java.awt.Dimension(200, 200));
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         txtRiwayat.setEditable(false);
         txtRiwayat.setColumns(20);
@@ -72,7 +72,7 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         jPanel1.setBackground(new java.awt.Color(49, 49, 49));
-        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Aplikasi Perhitungan Diskon", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins Black", 0, 14), new java.awt.Color(255, 255, 255)))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Aplikasi Perhitungan Diskon", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins Black", 0, 18), new java.awt.Color(255, 255, 255)))); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 400));
 
         lblHargaAsli.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -182,9 +182,7 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
                     .addComponent(lblHargaAsli)
                     .addComponent(lblHargaAkhirText)
                     .addComponent(lblHematText)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(lblSlider)))
+                    .addComponent(lblSlider))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -237,14 +235,14 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
                     .addComponent(btnKeluar)
                     .addComponent(btnReset))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHargaAkhirText)
-                    .addComponent(lblHargaAkhir))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHargaAkhir)
+                    .addComponent(lblHargaAkhirText))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHemat)
                     .addComponent(lblHematText))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
