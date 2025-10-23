@@ -319,7 +319,7 @@ public class PerhitunganDiskonFrame extends javax.swing.JFrame {
 
     private void txtHargaAsliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHargaAsliKeyTyped
     char c = evt.getKeyChar();
-        if (!Character.isDigit(c) && c != '.') {
+        if (!Character.isDigit(c)) {
                 evt.consume(); // Menolak input non-angka
         }            // TODO add your handling code here:
     }//GEN-LAST:event_txtHargaAsliKeyTyped
